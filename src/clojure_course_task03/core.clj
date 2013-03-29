@@ -144,7 +144,7 @@
 
   ;; Предыдущий макрос создает эти функции
   (select-operator-proposal) ;; select * proposal;
-  (select-operator-clients)  ;; select * from clients;
+  (select-operator-client)  ;; select * from client;
 
 
 
@@ -155,7 +155,7 @@
 
   ;; Предыдущий макрос создает эти функции
   (select-director-proposal) ;; select * proposal;
-  (select-director-clients)  ;; select * from clients;
+  (select-director-client)  ;; select * from clients;
   (select-director-agents)  ;; select * from agents;
   
 
