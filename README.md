@@ -19,12 +19,12 @@
 
 "SELECT * FROM proposal  WHERE price = 11 JOIN agents ON agents.proposal_id = proposal.id ORDER BY f3 LIMIT 5 OFFSET 5"
 
-Запрос select внутри себя ожидает лексическую переменную <table>-fields-var, где <table> -- имя таблицы. Поскольку в примере выше мы делаем запрос из таблицы proposal, то для корректной работы select-a необходимо, чтобы в области его видимости была переменная proposal-fields-var.
+Запрос select внутри себя ожидает лексическую переменную *table*-fields-var, где *table* -- имя таблицы. Поскольку в примере выше мы делаем запрос из таблицы proposal, то для корректной работы select-a необходимо, чтобы в области его видимости была переменная proposal-fields-var.
 
 Если выполнить запрос без объявления этой переменной, то компилятор Clojure выдаст ошибку:
 CompilerException java.lang.RuntimeException: Unable to resolve symbol: proposal-fields-var in this context
 
-В переменной <table>-fields-var необходимо хранить вектор ключевых слов, которые соответствуют разрешенным столбцам таблицы.
+В переменной *table*-fields-var необходимо хранить вектор ключевых слов, которые соответствуют разрешенным столбцам таблицы.
 
 Например, если таблица myusers содержит столбцы login, password, email, то в переменной myusers-fields-var должен быть вектор [:login, :password, :email]. Перечисленные в векторе столбцы разрешены для вывода оператором select.
 
