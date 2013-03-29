@@ -1,4 +1,5 @@
-(ns clojure-course-task03.core)
+(ns clojure-course-task03.core
+  (:require [clojure.set]))
 
 (defn join* [table-name conds]
   (let [op (first conds)
@@ -143,7 +144,7 @@
 
   ;; Предыдущий макрос создает эти функции
   (select-operator-proposal) ;; select * proposal;
-  (select-operator-clients)  ;; select * from clients;
+  (select-operator-client)  ;; select * from client;
 
 
 
@@ -154,7 +155,7 @@
 
   ;; Предыдущий макрос создает эти функции
   (select-director-proposal) ;; select * proposal;
-  (select-director-clients)  ;; select * from clients;
+  (select-director-client)  ;; select * from clients;
   (select-director-agents)  ;; select * from agents;
   
 
@@ -224,8 +225,12 @@
   ;; (user Ivanov
   ;;     (belongs-to Agent))
   ;; Создает переменные Ivanov-proposal-fields-var = [:person, :phone, :address, :price]
+<<<<<<< HEAD
   ;; и Ivanov-agents-fields-var = [:clients_id, :proposal_id, :agent]
   ;; Сохраняет эти же переменные в атоме *user-tables-vars*.
+=======
+  ;; и Ivanov-agents-fields-var = [:client_id, :proposal_id, :agent]
+>>>>>>> 428160cd3736b2300364788dfe925c4facfb0e60
   )
 
 (defmacro with-user [name & body]

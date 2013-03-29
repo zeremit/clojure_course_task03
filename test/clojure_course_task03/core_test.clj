@@ -54,5 +54,5 @@
 (deftest directorov-with-user-test
   (testing "Tesing Directorov with-user"
     (let [result (with-user Directorov
-                   (select clients (fields :all)))]
+                   (select client (fields :all)))]
       (is (= result "SELECT * FROM clients ")))))
