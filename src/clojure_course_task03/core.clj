@@ -32,6 +32,7 @@
         v (clojure.set/intersection v1 v2)]
     (cond
      (and (= (first flds) :all) (= (first allowed) :all)) "*"
+     (and (= (first flds) :all) (not= (first allowed) :all)) (-fields** allowed)
      (= :all (first allowed)) (-fields** flds)
      :else (-fields** v))))
 
@@ -54,13 +55,13 @@
                  (let [v (first elem)
                        v2 (second elem)
                        v3 (if (> (count elem) 2) (nth elem 2) nil)
-                       val (cond
-                            (= v 'fields) (list 'fields* (vec (next elem)) fields-var#)
-                            (= v 'offset) (list 'offset* v2)
-                            (= v 'limit) (list 'limit* v2)
-                            (= v 'order) (list 'order* v2 v3)
-                            (= v 'join) (list 'join* (list 'quote v2) (list 'quote v3))
-                            (= v 'where) (list 'where* v2))]
+                       val (case v
+                               fields (list 'fields* (vec (next elem)) fields-var#)
+                               offset (list 'offset* v2)
+                               limit (list 'limit* v2)
+                               order (list 'order* v2 v3)
+                               join (list 'join* (list 'quote v2) (list 'quote v3))
+                               where (list 'where* v2))]
                    [(keyword v) val]))
 
         ;; Takes a list of definitions like '((where ...) (join ...) ...) and returns
@@ -78,18 +79,36 @@
     
     `(select* ~(str table-name)  ~env#)))
 
-;; Example:
+
+;; Examples:
 ;; -------------------------------------
 
 (let [proposal-fields-var [:person, :phone, :address, :price]]
   (select proposal
-          (fields :person, :phone)
+          (fields :person, :phone, :id)
           (where {:price 11})
           (join agents (= agents.proposal_id proposal.id))
           (order :f3)
           (limit 5)
           (offset 5)))
 
+(let [proposal-fields-var [:person, :phone, :address, :price]]
+  (select proposal
+          (fields :all)
+          (where {:price 11})
+          (join agents (= agents.proposal_id proposal.id))
+          (order :f3)
+          (limit 5)
+          (offset 5)))
+
+(let [proposal-fields-var [:all]]
+  (select proposal
+          (fields :all)
+          (where {:price 11})
+          (join agents (= agents.proposal_id proposal.id))
+          (order :f3)
+          (limit 5)
+          (offset 5)))
 
 
 (comment
