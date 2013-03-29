@@ -57,7 +57,7 @@ CompilerException java.lang.RuntimeException: Unable to resolve symbol: proposal
 
 Здесь описывается группа Agent, в которой разрешен доступ к таблицам proposal и agents, причем только к перечисленным колонкам.	 
 
-Макрос group должен создать "запомнить" в какой-то переменной, какие таблицы и колонки разрешены для группы Agent. Кроме того, он должен создать две функции для запроса всех разрешенных колонок из таблиц: select-agent-proposal и select-agent-agents.
+Макрос group должен "запомнить" в какой-то переменной, какие таблицы и колонки разрешены для группы Agent. Кроме того, он должен создать две функции для запроса всех разрешенных колонок из таблиц: select-agent-proposal и select-agent-agents.
 
 Описание пользователя выглядит так:
 
@@ -69,8 +69,8 @@ CompilerException java.lang.RuntimeException: Unable to resolve symbol: proposal
 
 Запросы select предполагается использовать следующим образом:
 
-  (with-user Ivanov
-    (select proposal
+    (with-user Ivanov
+      (select proposal
             (fields :person, :phone)
             (join agents (= agents.proposal_id proposal.id))))
 
