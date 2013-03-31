@@ -161,8 +161,6 @@
 
   ;; Определяем пользователей и их группы
 
-  ;; Макрос user должен сохранять разрешенные пользователю таблицы и поля в атоме *user-tables-vars*.
-  
   (user Ivanov
         (belongs-to Agent))
 
@@ -226,7 +224,6 @@
   ;;     (belongs-to Agent))
   ;; Создает переменные Ivanov-proposal-fields-var = [:person, :phone, :address, :price]
   ;; и Ivanov-agents-fields-var = [:clients_id, :proposal_id, :agent]
-  ;; Сохраняет эти же переменные в атоме *user-tables-vars*.
   )
 
 (defmacro with-user [name & body]
