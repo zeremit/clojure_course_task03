@@ -216,7 +216,8 @@
   ;; 3) Создает следующие функции
   ;;    (select-agent-proposal) ;; select person, phone, address, price from proposal;
   ;;    (select-agent-agents)  ;; select clients_id, proposal_id, agent from agents;
-  )
+  (let [group-name (clojure.string/lower-case name)]
+    (println (first(next (next body))))))
 
 (defmacro user [name & body]
   ;; Пример
