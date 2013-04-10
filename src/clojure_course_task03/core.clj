@@ -204,6 +204,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TBD: Implement the following macros
 ;;
+(defn get-def-fields [[table symb fields]]
+  fields)
 
 (defmacro group [name & body]
   ;; Пример
@@ -216,10 +218,9 @@
   ;; 3) Создает следующие функции
   ;;    (select-agent-proposal) ;; select person, phone, address, price from proposal;
   ;;    (select-agent-agents)  ;; select clients_id, proposal_id, agent from agents;
-  (let [group-name# (clojure.string/lower-case name)
+  (let [group-name (clojure.string/lower-case name)
          tables-fields (partition 3 body)]
-     `(map #(println %) ~@tables-fields)
-     1))
+     `(map #(def ~(symbol (first ~%))  5) tables-fields)))
 
 (defmacro user [name & body]
   ;; Пример
