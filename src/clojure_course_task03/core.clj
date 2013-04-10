@@ -216,8 +216,10 @@
   ;; 3) Создает следующие функции
   ;;    (select-agent-proposal) ;; select person, phone, address, price from proposal;
   ;;    (select-agent-agents)  ;; select clients_id, proposal_id, agent from agents;
-  (let [group-name (clojure.string/lower-case name)]
-    `(do ~@(map #(println %) body))))
+  `(let [group-name# ~(clojure.string/lower-case name)
+         tables-fields# ~@body]
+     "ololo"
+    ))
 
 (defmacro user [name & body]
   ;; Пример
