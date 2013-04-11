@@ -220,7 +220,9 @@
   ;;    (select-agent-agents)  ;; select clients_id, proposal_id, agent from agents;
   (let [group-name (clojure.string/lower-case name)
          tables-fields (partition 3 body)]
-     `(map #(def ~(symbol (first ~%))  5) tables-fields)))
+    `(~@(map (fn [f](defs group-name (first f))) tables-fields))))
+(defmacro defs [name value]
+    `(def ~name ~value))
 
 (defmacro user [name & body]
   ;; Пример
