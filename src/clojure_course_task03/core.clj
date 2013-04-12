@@ -221,7 +221,7 @@
   (let [group-name (clojure.string/lower-case name)
          tables-fields (partition 3 body)]
      (map ( fn[[table ch fields]]
-            `(def ~(symbol (str group-name "-" table "-fields" )) ~fields)) 
+            `(def ~(symbol (str "group-" group-name "-" table "-fields" )) [~@(map #(keyword %) fields)])) 
           tables-fields)))
 
 (defmacro user [name & body]
